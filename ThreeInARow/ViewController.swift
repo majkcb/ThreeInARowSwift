@@ -10,7 +10,7 @@ import UIKit
 class ViewController: UIViewController {
     
     enum Turn {
-        case Nought
+        case Circle
         case Cross
     }
     
@@ -29,11 +29,12 @@ class ViewController: UIViewController {
     var firstTurn = Turn.Cross
     var currentTurn = Turn.Cross
     
-    var NOUGHT = "O"
+    var CIRCLE = "O"
     var CROSS = "X"
     var board = [UIButton]()
     
-    
+    var circlesScore = 0
+    var crossesScore = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +57,18 @@ class ViewController: UIViewController {
         
         addToBoard(sender)
         
+        if checkForVictory(CROSS){
+            crossesScore += 1
+        resultAlert(title: "Crosses Win!")
+            
+        }
+        
+        if checkForVictory(CIRCLE){
+            circlesScore += 1
+        resultAlert(title: "Circle Win!")
+            
+        }
+        
         if(fullBoard()) {
             resultAlert(title: "Draw")
             
@@ -63,9 +76,59 @@ class ViewController: UIViewController {
         
     }
     
+    func checkForVictory(_ s :String) -> Bool {
+        
+        //Horizontal Victory
+        
+        if thisSymbol(a1, s) && thisSymbol(a2, s) && thisSymbol(a3, s) {
+            return true
+        }
+        
+        if thisSymbol(b1, s) && thisSymbol(b2, s) && thisSymbol(b3, s) {
+            return true
+        }
+        
+        if thisSymbol(c1, s) && thisSymbol(c2, s) && thisSymbol(c3, s) {
+            return true
+        }
+        
+        //Vertical Victory
+        
+        if thisSymbol(a1, s) && thisSymbol(b1, s) && thisSymbol(c1, s) {
+            return true
+        }
+        
+        if thisSymbol(a2, s) && thisSymbol(b2, s) && thisSymbol(c2, s) {
+            return true
+        }
+        
+        if thisSymbol(a3, s) && thisSymbol(b3, s) && thisSymbol(c3, s) {
+            return true
+        }
+        
+        //Diagonal Victory
+        
+        if thisSymbol(a1, s) && thisSymbol(b2, s) && thisSymbol(c3, s) {
+            return true
+        }
+        
+        if thisSymbol(a3, s) && thisSymbol(b2, s) && thisSymbol(c1, s) {
+            return true
+        }
+        
+        return false
+    }
+    
+    func thisSymbol(_ button: UIButton, _ symbol: String) -> Bool {
+        return button.title(for: .normal) == symbol
+    }
+    
     func resultAlert(title: String) {
-        let ac = UIAlertController(title: title, message: nil, preferredStyle: .actionSheet)
-        ac.addAction(UIAlertAction(title: "Reset", style: .default, handler: { (_) in
+        
+        let message = "\nCircles " + String(circlesScore) + "\n\nCrosses " + String(crossesScore)
+                                            
+        let ac = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+        ac.addAction(UIAlertAction(title: "Continue Playing", style: .default, handler: { (_) in
             self.resetBoard()
             
         }))
@@ -78,13 +141,13 @@ class ViewController: UIViewController {
             button.setTitle(nil, for: .normal)
             button.isEnabled = true
         }
-        if (firstTurn == Turn.Nought){
+        if (firstTurn == Turn.Circle){
             firstTurn = Turn.Cross
             turnLabel.text = CROSS
             
         } else if (firstTurn == Turn.Cross){
-            firstTurn = Turn.Nought
-            turnLabel.text = NOUGHT
+            firstTurn = Turn.Circle
+            turnLabel.text = CIRCLE
         }
         
         currentTurn = firstTurn
@@ -104,15 +167,15 @@ class ViewController: UIViewController {
     
     func addToBoard(_ sender: UIButton) {
         if (sender.title(for: .normal) == nil) {
-            if (currentTurn == Turn.Nought) {
-                sender.setTitle(NOUGHT, for: .normal)
+            if (currentTurn == Turn.Circle) {
+                sender.setTitle(CIRCLE, for: .normal)
                 currentTurn = Turn.Cross
                 turnLabel.text = CROSS
                 
             } else if (currentTurn == Turn.Cross) {
                 sender.setTitle(CROSS, for: .normal)
-                currentTurn = Turn.Nought
-                turnLabel.text = NOUGHT
+                currentTurn = Turn.Circle
+                turnLabel.text = CIRCLE
                 
             }
             
