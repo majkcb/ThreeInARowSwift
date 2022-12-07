@@ -25,12 +25,18 @@ class ViewController: UIViewController {
     @IBOutlet weak var c1: UIButton!
     @IBOutlet weak var c2: UIButton!
     @IBOutlet weak var c3: UIButton!
+
+    
+    var receivingPlayerOne : String?
+    var receivingPlayerTwo : String?
     
     var firstTurn = Turn.Cross
     var currentTurn = Turn.Cross
     
-    var CIRCLE = "O"
     var CROSS = "X"
+    var CIRCLE = "O"
+    
+    
     var board = [UIButton]()
     
     var circlesScore = 0
@@ -39,6 +45,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initBoard()
+        turnLabel.text = receivingPlayerOne
     }
     
     func initBoard() {
@@ -59,13 +66,13 @@ class ViewController: UIViewController {
         
         if checkForVictory(CROSS){
             crossesScore += 1
-        resultAlert(title: "Crosses Win!")
+        resultAlert(title: "\(receivingPlayerOne ?? "Crosses") Win!")
             
         }
         
         if checkForVictory(CIRCLE){
             circlesScore += 1
-        resultAlert(title: "Circle Win!")
+        resultAlert(title: "\(receivingPlayerTwo ?? "Circles") Win!")
             
         }
         
@@ -123,16 +130,15 @@ class ViewController: UIViewController {
         return button.title(for: .normal) == symbol
     }
     
-    func resultAlert(title: String) {
+    func resultAlert(title : String){
         
-        let message = "\nCircles " + String(circlesScore) + "\n\nCrosses " + String(crossesScore)
-                                            
-        let ac = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
-        ac.addAction(UIAlertAction(title: "Continue Playing", style: .default, handler: { (_) in
-            self.resetBoard()
-            
-        }))
-        self.present(ac, animated: true)
+            let message = "\n\(receivingPlayerOne ?? "Crosses") " + String(crossesScore) + "\n\(receivingPlayerTwo ?? "Circles") " + String(circlesScore)
+            let ac = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+            ac.addAction(UIAlertAction(title: "Continue Playing", style: .default, handler: {(_) in
+                self.resetBoard()
+            }))
+        
+            self.present(ac, animated: true)
     }
     
     func resetBoard() {
@@ -143,11 +149,11 @@ class ViewController: UIViewController {
         }
         if (firstTurn == Turn.Circle){
             firstTurn = Turn.Cross
-            turnLabel.text = CROSS
+            turnLabel.text = receivingPlayerOne
             
         } else if (firstTurn == Turn.Cross){
             firstTurn = Turn.Circle
-            turnLabel.text = CIRCLE
+            turnLabel.text = receivingPlayerTwo
         }
         
         currentTurn = firstTurn
@@ -170,12 +176,12 @@ class ViewController: UIViewController {
             if (currentTurn == Turn.Circle) {
                 sender.setTitle(CIRCLE, for: .normal)
                 currentTurn = Turn.Cross
-                turnLabel.text = CROSS
+                turnLabel.text = receivingPlayerOne
                 
             } else if (currentTurn == Turn.Cross) {
                 sender.setTitle(CROSS, for: .normal)
                 currentTurn = Turn.Circle
-                turnLabel.text = CIRCLE
+                turnLabel.text = receivingPlayerTwo
                 
             }
             

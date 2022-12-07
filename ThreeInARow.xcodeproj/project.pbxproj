@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		092F0614293E573D00F84AC3 /* EnterGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092F0613293E573D00F84AC3 /* EnterGameViewController.swift */; };
 		097DE0B5293619AD0071C3D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097DE0B4293619AD0071C3D2 /* AppDelegate.swift */; };
 		097DE0B7293619AD0071C3D2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097DE0B6293619AD0071C3D2 /* SceneDelegate.swift */; };
 		097DE0B9293619AD0071C3D2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097DE0B8293619AD0071C3D2 /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		092F0613293E573D00F84AC3 /* EnterGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterGameViewController.swift; sourceTree = "<group>"; };
 		097DE0B1293619AD0071C3D2 /* ThreeInARow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThreeInARow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		097DE0B4293619AD0071C3D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		097DE0B6293619AD0071C3D2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 				097DE0B4293619AD0071C3D2 /* AppDelegate.swift */,
 				097DE0B6293619AD0071C3D2 /* SceneDelegate.swift */,
 				097DE0B8293619AD0071C3D2 /* ViewController.swift */,
+				092F0613293E573D00F84AC3 /* EnterGameViewController.swift */,
 				097DE0BA293619AD0071C3D2 /* Main.storyboard */,
 				097DE0BD293619B00071C3D2 /* Assets.xcassets */,
 				097DE0BF293619B00071C3D2 /* LaunchScreen.storyboard */,
@@ -141,6 +144,7 @@
 				097DE0B9293619AD0071C3D2 /* ViewController.swift in Sources */,
 				097DE0B5293619AD0071C3D2 /* AppDelegate.swift in Sources */,
 				097DE0B7293619AD0071C3D2 /* SceneDelegate.swift in Sources */,
+				092F0614293E573D00F84AC3 /* EnterGameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
